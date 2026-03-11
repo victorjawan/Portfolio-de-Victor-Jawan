@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jawan Victor — Portfolio BTS SIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #080c10;
+    --bg2: #0d1520;
+    --bg3: #111d2e;
+    --accent: #00d4ff;
+    --accent2: #7b2fff;
+    --accent3: #ff3c6e;
+    --text: #e8f0fe;
+    --muted: #6b8cae;
+    --border: rgba(0,212,255,0.15);
+    --glow: 0 0 20px rgba(0,212,255,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Scanlines effect */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* Grid background */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(0,212,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(8,12,16,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Space Mono', monospace;
+    font-size: 1rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+  }
+
+  .nav-logo span { color: var(--accent3); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    font-family: 'Space Mono', monospace;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  #hero {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 10vw;
+    overflow: hidden;
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.15;
+    pointer-events: none;
+  }
+
+  .circle1 {
+    width: 600px; height: 600px;
+    background: var(--accent2);
+    top: -150px; right: -100px;
+    animation: pulse 6s ease-in-out infinite alternate;
+  }
+
+  .circle2 {
+    width: 400px; height: 400px;
+    background: var(--accent);
+    bottom: 0; left: -100px;
+    animation: pulse 8s ease-in-out infinite alternate-reverse;
+  }
+
+  @keyframes pulse {
+    from { transform: scale(1); opacity: 0.12; }
+    to { transform: scale(1.2); opacity: 0.2; }
+  }
+
+  .hero-content {
+    max-width: 700px;
+    animation: fadeUp 1s ease forwards;
+  }
+
+  .hero-tag {
+    display: inline-block;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid var(--accent);
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-tag::before {
+    content: '';
+    position: absolute;
+    left: -100%; top: 0; bottom: 0; width: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0,212,255,0.2), transparent);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer { to { left: 200%; } }
+
+  .hero-name {
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-name .first { color: var(--text); }
+  .hero-name .last {
+    color: transparent;
+    -webkit-text-stroke: 2px var(--accent);
+  }
+
+  .hero-subtitle {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-subtitle .hl { color: var(--accent3); }
+
+  .hero-desc {
+    font-size: 1.1rem;
+    color: rgba(232,240,254,0.7);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 3rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    background: var(--accent);
+    color: var(--bg);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.3s;
+    box-shadow: var(--glow);
+  }
+
+  .btn-primary:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0,212,255,0.5);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    background: transparent;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    background: rgba(0,212,255,0.1);
+    transform: translateY(-2px);
+  }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--muted);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    animation: bounce 2s ease infinite;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 8rem 10vw;
+  }
+
+  .section-header {
+    margin-bottom: 4rem;
+  }
+
+  .section-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .section-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .section-line {
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--accent), var(--accent2));
+    margin-top: 1.5rem;
+    border-radius: 2px;
+  }
+
+  /* ABOUT */
+  #about {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    font-size: 1.05rem;
+    color: rgba(232,240,254,0.75);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+  }
+
+  .about-text p strong { color: var(--accent); }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--accent), var(--accent2));
+  }
+
+  .stat-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .stat-num {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--accent);
+    font-family: 'Space Mono', monospace;
+    display: block;
+  }
+
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-family: 'Space Mono', monospace;
+    margin-top: 0.3rem;
+  }
+
+  /* SKILLS */
+  #skills { background: var(--bg); }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .skill-category {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+
+  .skill-category:hover { border-color: rgba(0,212,255,0.4); }
+
+  .skill-cat-title {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--accent);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .skill-cat-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .skill-item {
+    margin-bottom: 1.2rem;
+  }
+
+  .skill-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .skill-name {
+    font-size: 0.9rem;
+    color: var(--text);
+  }
+
+  .skill-pct {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  .skill-bar {
+    height: 4px;
+    background: rgba(255,255,255,0.05);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--accent), var(--accent2));
+    animation: fillBar 1.5s ease forwards;
+    transform-origin: left;
+  }
+
+  @keyframes fillBar {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  /* PROJECTS */
+  #projects {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+  }
+
+  .project-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all 0.4s;
+    position: relative;
+    cursor: pointer;
+  }
+
+  .project-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), var(--glow);
+  }
+
+  .project-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .project-num {
+    font-family: 'Space Mono', monospace;
+    font-size: 3rem;
+    font-weight: 700;
+    color: rgba(0,212,255,0.08);
+    position: absolute;
+    top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+
+  .project-icon {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-type {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .project-body {
+    padding: 1.5rem 2rem 2rem;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: rgba(232,240,254,0.65);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--accent2);
+    border: 1px solid rgba(123,47,255,0.3);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* CV SECTION */
+  #cv {
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+  }
+
+  .cv-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .cv-preview {
+    position: relative;
+  }
+
+  .cv-frame {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cv-frame::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,212,255,0.05) 0%, transparent 50%, rgba(123,47,255,0.05) 100%);
+    pointer-events: none;
+  }
+
+  .cv-corner {
+    position: absolute;
+    width: 20px; height: 20px;
+    border-color: var(--accent);
+    border-style: solid;
+  }
+
+  .cv-corner.tl { top: 8px; left: 8px; border-width: 2px 0 0 2px; }
+  .cv-corner.tr { top: 8px; right: 8px; border-width: 2px 2px 0 0; }
+  .cv-corner.bl { bottom: 8px; left: 8px; border-width: 0 0 2px 2px; }
+  .cv-corner.br { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+
+  .cv-img {
+    width: 100%;
+    border-radius: 2px;
+    display: block;
+    filter: brightness(0.9) contrast(1.1);
+  }
+
+  .cv-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .info-block {
+    border-left: 2px solid var(--accent);
+    padding-left: 1.5rem;
+  }
+
+  .info-block h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text);
+  }
+
+  .info-block p, .info-block a {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+
+  .info-block a:hover { color: var(--accent); }
+
+  .lang-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    margin-top: 0.5rem;
+  }
+
+  .lang-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+  }
+
+  .lang-name { color: var(--text); }
+
+  .lang-level {
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    color: var(--accent);
+  }
+
+  /* CONTACT */
+  #contact {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .contact-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-inner .section-line { margin: 1.5rem auto 3rem; }
+
+  .contact-desc {
+    font-size: 1.1rem;
+    color: rgba(232,240,254,0.65);
+    line-height: 1.7;
+    margin-bottom: 3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 4rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 1rem 1.8rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    text-decoration: none;
+    font-family: 'Space Mono', monospace;
+    font-size: 0.8rem;
+    transition: all 0.3s;
+  }
+
+  .contact-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: var(--glow);
+  }
+
+  .contact-link .icon { font-size: 1.1rem; }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    font-family: 'Space Mono', monospace;
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+  }
+
+  footer span { color: var(--accent); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    section { padding: 5rem 6vw; }
+    .about-grid, .cv-container { grid-template-columns: 1fr; gap: 3rem; }
+    .hero-name { font-size: clamp(3rem, 15vw, 5rem); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">JV<span>_</span>DEV</div>
+  <ul class="nav-links">
+    <li><a href="#about">À propos</a></li>
+    <li><a href="#skills">Compétences</a></li>
+    <li><a href="#projects">Projets</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-circle circle1"></div>
+  <div class="hero-bg-circle circle2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">⚡ Disponible pour stage — Mai au 03 Juillet 2026</div>
+    <h1 class="hero-name">
+      <div class="first">Jawan</div>
+      <div class="last">Victor</div>
+    </h1>
+    <p class="hero-subtitle">BTS SIO <span class="hl">SLAM</span> · Lycée René Descartes · Champs-sur-Marne</p>
+    <p class="hero-desc">Déterminé, sérieux et autonome, je suis étudiant en première année de BTS SIO option SLAM. Passionné par le développement et la cybersécurité, je construis des solutions logicielles et cherche à mettre en pratique mes compétences.</p>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">📬 Me contacter</a>
+      <a href="#cv" class="btn-outline">📄 Voir mon CV</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    Scroll
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-header fade-in">
+    <span class="section-num">01 // À propos</span>
+    <h2 class="section-title">Qui suis-je ?</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text fade-in">
+      <p>Je m'appelle <strong>Jawan Victor</strong>, étudiant en BTS SIO option SLAM (Solutions Logicielles et Applications Métiers) au Lycée René Descartes à Champs-sur-Marne.</p>
+      <p>Après un Bac STI2D spécialité numérique, j'ai développé des bases solides en <strong>algorithmique, systèmes embarqués et programmation</strong>. Mon passage en échange Erasmus en Italie m'a permis de travailler sur un projet concret de codage et d'installation de LED.</p>
+      <p>Je suis actuellement à la <strong>recherche d'un stage du 25 mai au 03 juillet 2026</strong> pour appliquer mes compétences dans un environnement professionnel réel.</p>
+    </div>
+    <div class="about-stats fade-in">
+      <div class="stat-card">
+        <span class="stat-num">1ère</span>
+        <span class="stat-label">Année BTS SIO</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Langues maîtrisées</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">3+</span>
+        <span class="stat-label">Pays visités</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">2026</span>
+        <span class="stat-label">Stage disponible</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-header fade-in">
+    <span class="section-num">02 // Compétences</span>
+    <h2 class="section-title">Stack technique</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-category fade-in">
+      <div class="skill-cat-title">💻 Développement</div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">HTML / CSS</span>
+          <span class="skill-pct">60%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:60%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">Python</span>
+          <span class="skill-pct">30%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:30%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">Algorithmique</span>
+          <span class="skill-pct">50%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:50%"></div></div>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <div class="skill-cat-title">🔧 Outils & Systèmes</div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">Arduino / Systèmes embarqués</span>
+          <span class="skill-pct">55%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:55%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">VS Code</span>
+          <span class="skill-pct">65%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:65%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">Tinkercad / SolidWorks</span>
+          <span class="skill-pct">50%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:50%"></div></div>
+      </div>
+    </div>
+    <div class="skill-category fade-in">
+      <div class="skill-cat-title">🌐 Réseau & Données</div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">Bases en réseau</span>
+          <span class="skill-pct">40%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">Communication de données</span>
+          <span class="skill-pct">40%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-top">
+          <span class="skill-name">GitHub</span>
+          <span class="skill-pct">45%</span>
+        </div>
+        <div class="skill-bar"><div class="skill-fill" style="width:45%"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-header fade-in">
+    <span class="section-num">03 // Projets</span>
+    <h2 class="section-title">Réalisations</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="projects-grid">
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-num">01</div>
+        <div class="project-icon">💡</div>
+        <h3 class="project-title">Projet LED Erasmus — Italie</h3>
+        <span class="project-type">Projet international · Avril 2024</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Participation à un échange Erasmus à Potenza, Italie. Présentation et partage d'un projet de codage et d'installation de LED avec des lycéens italiens à l'ISTITUTO Einstein - De Lorenzo.</p>
+        <div class="project-tags">
+          <span class="tag">Arduino</span>
+          <span class="tag">Codage LED</span>
+          <span class="tag">Erasmus</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-num">02</div>
+        <div class="project-icon">🌐</div>
+        <h3 class="project-title">Portfolio personnel</h3>
+        <span class="project-type">Développement web · 2025</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">Création de ce portfolio professionnel en HTML/CSS pour présenter mes compétences, projets et parcours dans le cadre de ma formation BTS SIO SLAM.</p>
+        <div class="project-tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
+        </div>
+      </div>
+    </div>
+    <div class="project-card fade-in">
+      <div class="project-header">
+        <div class="project-num">03</div>
+        <div class="project-icon">🔒</div>
+        <h3 class="project-title">Projets BTS SIO en cours</h3>
+        <span class="project-type">Formation · 2025-2026</span>
+      </div>
+      <div class="project-body">
+        <p class="project-desc">En cours de réalisation dans le cadre du BTS SIO : applications de gestion, scripts Python, bases de données et travaux pratiques réseau & cybersécurité.</p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Réseau</span>
+          <span class="tag">Cybersécurité</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv">
+  <div class="section-header fade-in">
+    <span class="section-num">04 // Curriculum Vitae</span>
+    <h2 class="section-title">Mon parcours</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="cv-container">
+    <div class="cv-preview fade-in">
+      <div class="cv-frame">
+        <div class="cv-corner tl"></div>
+        <div class="cv-corner tr"></div>
+        <div class="cv-corner bl"></div>
+        <div class="cv-corner br"></div>
+        <!-- CV EMBED: remplace le src par le chemin vers ton fichier PDF ou une image de ton CV -->
+        <iframe 
+          src="CV_Jawan_Victor-1.pdf" 
+          style="width:100%; height:500px; border:none; border-radius:2px;"
+          title="CV Jawan Victor">
+        </iframe>
+      </div>
+      <div style="margin-top:1rem; text-align:center;">
+        <a href="CV_Jawan_Victor-1.pdf" download class="btn-primary" style="display:inline-flex; margin-top:0.5rem;">
+          ⬇ Télécharger le CV
+        </a>
+      </div>
+    </div>
+    <div class="cv-info fade-in">
+      <div class="info-block">
+        <h3>📍 Localisation</h3>
+        <p>87 rue Alexandre Bickart<br>77500 Chelles, France</p>
+      </div>
+      <div class="info-block">
+        <h3>📧 Contact</h3>
+        <p><a href="mailto:victorjawan2007@gmail.com">victorjawan2007@gmail.com</a></p>
+        <p><a href="tel:0783293360">07 83 29 33 60</a></p>
+      </div>
+      <div class="info-block">
+        <h3>🎓 Formation</h3>
+        <p><strong style="color:var(--text)">2025–2027</strong> — BTS SIO Cybersécurité SLAM<br>Lycée René Descartes, Champs-sur-Marne</p>
+        <p style="margin-top:0.8rem"><strong style="color:var(--text)">2023–2025</strong> — Bac STI2D SIN<br>Lycée Louis Armand, Nogent-sur-Marne</p>
+      </div>
+      <div class="info-block">
+        <h3>🌍 Langues</h3>
+        <div class="lang-grid">
+          <div class="lang-item">
+            <span class="lang-name">Tamoul</span>
+            <span class="lang-level">C1</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">Anglais</span>
+            <span class="lang-level">B2</span>
+          </div>
+          <div class="lang-item">
+            <span class="lang-name">Français</span>
+            <span class="lang-level">B2</span>
+          </div>
+        </div>
+      </div>
+      <div class="info-block">
+        <h3>⚽ Centres d'intérêt</h3>
+        <p>Badminton · Course à pied · Voyages (Italie, Allemagne, Suède)</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="section-header fade-in">
+      <span class="section-num">05 // Contact</span>
+      <h2 class="section-title">Travaillons ensemble</h2>
+      <div class="section-line"></div>
+    </div>
+    <p class="contact-desc fade-in">Je suis disponible pour un <strong style="color:var(--accent)">stage du 25 mai au 03 juillet 2026</strong>. N'hésitez pas à me contacter pour toute opportunité ou collaboration !</p>
+    <div class="contact-links fade-in">
+      <a href="mailto:victorjawan2007@gmail.com" class="contact-link">
+        <span class="icon">📧</span> victorjawan2007@gmail.com
+      </a>
+      <a href="tel:0783293360" class="contact-link">
+        <span class="icon">📱</span> 07 83 29 33 60
+      </a>
+      <a href="https://github.com/victorjawan/" target="_blank" class="contact-link">
+        <span class="icon">💻</span> GitHub
+      </a>
+    </div>
+    <a href="mailto:victorjawan2007@gmail.com" class="btn-primary fade-in" style="display:inline-flex;">
+      ✉️ Envoyer un message
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 <span>Jawan Victor</span> — BTS SIO SLAM · Conçu avec passion</p>
+</footer>
+
+<script>
+  // Intersection Observer pour animations fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, i * 100);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Typing effect pour le hero tag
+  const tag = document.querySelector('.hero-tag');
+  if (tag) {
+    const text = tag.textContent;
+    tag.textContent = '';
+    let i = 0;
+    const type = () => {
+      if (i < text.length) {
+        tag.textContent += text[i++];
+        setTimeout(type, 40);
+      }
+    };
+    setTimeout(type, 500);
+  }
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.getAttribute('id');
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  });
+</script>
+
+</body>
+</html>
